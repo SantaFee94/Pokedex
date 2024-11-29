@@ -1,0 +1,50 @@
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #121212;
+    height: 100%;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    padding-top: 32px;
+}
+
+header {
+    width: auto;
+    height: 114px;
+    background-color: rgb(0, 0, 0);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+header h1 {
+    color: yellow;
+    font-size: 125px;
+    margin: 0;
+    -webkit-text-fill-color: yellow; /* Will override color (regardless of order) */
+    -webkit-text-stroke: 3px blue;
+}
+
+#content {
+    max-width: 1800px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 32px;
+    padding-bottom: 32px;
+}
+
+.user-search-container {
+    display: flex;
+}
+
+.user-search-container input {
+    width: 185px;
+    text-align: center;
+}
+
+

@@ -1,0 +1,41 @@
+.card-group {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+}
+
+.card{
+    width: 100% !important;
+    border: solid 2px grey;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent;
+    color: white;
+    background-color: 18, 18, 18;
+    transition: all 0.5s ease;
+    box-shadow: 0px 0px 31px 5px #3d3d3d;
+    &:hover {
+        box-shadow: 0px 0px 15px 20px #9c9c9c;
+    }
+}
+
+.card img {
+    width: 225px;
+    height: 225px;
+}
+
+.card-title {
+    text-align: center;
+}
+
+.text-body-secondary {
+    display: flex;
+    gap: 32px;
+    padding-bottom: 24px;
+}
+
+.text-body-secondary p {
+    padding: 12px;
+    border-radius: 0px 10px 0px 10px;
+}

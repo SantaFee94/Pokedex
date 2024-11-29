@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Pokedex</title>
+        <link rel="icon" href="./assets/img/icon/pokeball.png" />
+        <link rel="stylesheet" href="./assets/css/style.css" />
+        <link rel="stylesheet" href="./assets/css/colors.css" />
+        <link rel="stylesheet" href="./assets/css/cards.css" />
+        <link rel="stylesheet" href="./assets/css/card-overlay.css" />
+        <link rel="stylesheet" href="./assets/css/loading-screen.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet"
+        />
+
+        <script src="./assets/js/script.js"></script>
+        <script src="./assets/js/template.js"></script>
+        <script src="./assets/js/loading-screen.js" defer></script>
+        <script src="./assets/js/search-function.js"></script>
+    </head>
+    <body onload="init()">
+        <header>
+            <div class="headline"><h1>Pokedex</h1></div>
+            <div class="user-search-container">
+                <input id="userSearch" class="user-search" type="text" placeholder="Welches Pokemon suchst du?" /><button
+                    onclick="searchPokemon()"
+                    class="search-button"
+                >
+                    Suchen
+                </button>
+            </div>
+        </header>
+        <main>
+            <div id="content"></div>
+        </main>
+        <div><button onclick="loadMorePokemon()">Mehr Pokemon</button></div>
+        <div id="loading-overlay" class="loading-overlay">
+            <div class="loader"></div>
+        </div>
+    </body>
+</html>
