@@ -1,4 +1,5 @@
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon";
+let GLOBAL_ALL_POKEMONS = [];
 let limit = 20;
 let offset = 0;
 let allPokemon = [];
@@ -24,19 +25,19 @@ const TYPE_COLORS = {
 };
 
 async function init() {
-    showLoadingOverlay()
-    await fetchPokemonData();
-    renderPokemons();
-    
+    showLoadingOverlay();
+    allPokemon = allPokemon.concat(await fetchPokemonData(limit, offset)) ;
+    GLOBAL_ALL_POKEMONS = await fetchPokemonData(151, 0);
+    renderPokemons(allPokemon);
 }
 
-async function fetchPokemonData() {
+async function fetchPokemonData(fetchLimit, fetchOffset) {
     try {
-        const URL = `${BASE_URL}?limit=${limit}&offset=${offset}`;
+        const URL = `${BASE_URL}?limit=${fetchLimit}&offset=${fetchOffset}`;
         const RESPONSE = await fetch(URL);
         if (RESPONSE.ok) {
             const DATA = await RESPONSE.json();
-            allPokemon = allPokemon.concat(DATA.results);
+            return DATA.results;
         } else {
             throw new Error("Failed to fetch Pokémon data");
         }
@@ -45,25 +46,27 @@ async function fetchPokemonData() {
     }
 }
 
-async function renderPokemons() {
+async function renderPokemons(POKEMONS) {
     const contentRef = document.getElementById("content");
     contentRef.innerHTML = "";
     const fragment = document.createDocumentFragment();
 
-    for (const [index, POKEMON] of allPokemon.entries()) {
+    for (let index = 0; index < POKEMONS.length; index++) {
+        const POKEMON = POKEMONS[index];
+
         try {
             const DETAILS = await fetchPokemonDetails(POKEMON.url);
             const { PRIMARY_TYPE, SECONDARY_TYPE, BG_COLOR_PRIMARY, BG_COLOR_SECONDARY } = getPokemonTypeColors(DETAILS);
             const POKEMON_NAME = capitalizeFirstLetter(POKEMON.name);
             const POKEMON_ID = getPokemonIdFromUrl(POKEMON.url);
-            const DIV = createPokemonElement(index, POKEMON_NAME, POKEMON_ID, BG_COLOR_PRIMARY, BG_COLOR_SECONDARY, PRIMARY_TYPE, SECONDARY_TYPE);
+            const DIV = createPokemonElement(POKEMON_NAME, POKEMON_ID, BG_COLOR_PRIMARY, BG_COLOR_SECONDARY, PRIMARY_TYPE, SECONDARY_TYPE);
             fragment.appendChild(DIV);
         } catch (error) {
             console.error("Error fetching Pokémon details:", error);
         }
     }
-    
-    contentRef.innerHTML = hideLoadingOverlay();
+
+    hideLoadingOverlay();
     contentRef.appendChild(fragment);
 }
 
@@ -83,16 +86,16 @@ function getPokemonTypeColors(DETAILS) {
     return { PRIMARY_TYPE, SECONDARY_TYPE, BG_COLOR_PRIMARY, BG_COLOR_SECONDARY };
 }
 
-function createPokemonElement(index,POKEMON_NAME, POKEMON_ID, BG_COLOR_PRIMARY, BG_COLOR_SECONDARY, PRIMARY_TYPE, SECONDARY_TYPE) {
+function createPokemonElement(POKEMON_NAME, POKEMON_ID, BG_COLOR_PRIMARY, BG_COLOR_SECONDARY, PRIMARY_TYPE, SECONDARY_TYPE) {
     const DIV = document.createElement("div");
-    DIV.innerHTML = pokemonTemplate(
-        { name: POKEMON_NAME },
-        POKEMON_ID,
-        BG_COLOR_PRIMARY,
-        BG_COLOR_SECONDARY,
-        { ability: PRIMARY_TYPE },
-        { ability: SECONDARY_TYPE }
-    );
+    DIV.innerHTML = pokemonTemplate({
+        name: POKEMON_NAME,
+        id: POKEMON_ID,
+        abilityPrimary: PRIMARY_TYPE,
+        abilitySecondary: SECONDARY_TYPE,
+        colorPrimary: BG_COLOR_PRIMARY,
+        colorSecondary: BG_COLOR_SECONDARY,
+    });
     return DIV;
 }
 
@@ -106,8 +109,6 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 async function loadMorePokemon() {
-    offset += 15;
+    offset += 20;
     init();
 }
-
-

@@ -1,15 +1,15 @@
-function pokemonTemplate( POKEMON, POKEMON_ID, BG_COLOR_PRIMARY, BG_COLOR_SECONDARY, PRIMARY_TYPE, SECONDARY_TYPE) {
-    const IMAGE_URL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${POKEMON_ID}.png`;
+function pokemonTemplate(POKEMON) {
+    const IMAGE_URL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${POKEMON.id}.png`;
 
     return `<div class="card-group">
-                <div class="card" onclick=" toggleOverlay(${POKEMON_ID})">
-                    <img src="${IMAGE_URL}" class="card-img-top" alt="${POKEMON.name}" style="background-color:${BG_COLOR_PRIMARY};" />
+                <div class="card" onclick=" toggleOverlay(${POKEMON.id})">
+                    <img src="${IMAGE_URL}" class="card-img-top" alt="${POKEMON.name}" style="background-color:${POKEMON.colorPrimary};" />
                     <div class="card-body">
-                        <h5 class="card-title">#${POKEMON_ID} ${POKEMON.name}</h5>
+                        <h5 class="card-title">#${POKEMON.id} ${POKEMON.name}</h5>
                         
                     </div>
                     <div class="card-footer">
-                        <small class="text-body-secondary"><p style="background-color: ${BG_COLOR_PRIMARY};">${PRIMARY_TYPE.ability}</p><p id="secondaryAbility" style="background-color: ${BG_COLOR_SECONDARY};">${SECONDARY_TYPE.ability}</p></small>
+                        <small class="text-body-secondary"><p style="background-color: ${POKEMON.colorPrimary};">${POKEMON.abilityPrimary}</p><p id="secondaryAbility" style="background-color: ${POKEMON.colorSecondary};">${POKEMON.abilitySecondary}</p></small>
                     </div>
                 </div>`;
 }
