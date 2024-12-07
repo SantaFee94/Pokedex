@@ -4,7 +4,7 @@
     gap: 32px;
 }
 
-.card{
+.card {
     width: 100% !important;
     border: solid 2px grey;
     display: flex;
@@ -39,3 +39,5 @@
     padding: 12px;
     border-radius: 0px 10px 0px 10px;
 }
+
+

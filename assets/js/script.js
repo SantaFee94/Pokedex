@@ -3,6 +3,7 @@ let GLOBAL_ALL_POKEMONS = [];
 let limit = 20;
 let offset = 0;
 let allPokemon = [];
+let currentPokemonDetails = [];
 const TYPE_COLORS = {
     fire: "#f05430",
     water: "#6890F0",
@@ -25,9 +26,9 @@ const TYPE_COLORS = {
 };
 
 async function init() {
-    showLoadingOverlay();
-    allPokemon = allPokemon.concat(await fetchPokemonData(limit, offset)) ;
-    GLOBAL_ALL_POKEMONS = await fetchPokemonData(151, 0);
+    toggleOverlay("loading-overlay", "visible");
+    allPokemon = allPokemon.concat(await fetchPokemonData(limit, offset));
+    GLOBAL_ALL_POKEMONS = await fetchPokemonData(1015, 0);
     renderPokemons(allPokemon);
 }
 
@@ -66,7 +67,7 @@ async function renderPokemons(POKEMONS) {
         }
     }
 
-    hideLoadingOverlay();
+    toggleOverlay("loading-overlay", "hidden");
     contentRef.appendChild(fragment);
 }
 
@@ -84,11 +85,13 @@ function getPokemonTypeColors(DETAILS) {
     const BG_COLOR_SECONDARY = SECONDARY_TYPE ? TYPE_COLORS[SECONDARY_TYPE.toLowerCase()] || "#429937" : "";
 
     return { PRIMARY_TYPE, SECONDARY_TYPE, BG_COLOR_PRIMARY, BG_COLOR_SECONDARY };
+
+    
 }
 
 function createPokemonElement(POKEMON_NAME, POKEMON_ID, BG_COLOR_PRIMARY, BG_COLOR_SECONDARY, PRIMARY_TYPE, SECONDARY_TYPE) {
     const DIV = document.createElement("div");
-    DIV.innerHTML = pokemonTemplate({
+    DIV.innerHTML = pokemonToHtmlTemplate({
         name: POKEMON_NAME,
         id: POKEMON_ID,
         abilityPrimary: PRIMARY_TYPE,
@@ -112,3 +115,5 @@ async function loadMorePokemon() {
     offset += 20;
     init();
 }
+
+
