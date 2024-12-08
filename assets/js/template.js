@@ -35,7 +35,7 @@ function pokemonDetailsCardToHtmlTemplate(POKEMON) {
 
     return `
         <div class="card-group">
-            <div class="pokemon-card" onclick="showPokemnonCard(${POKEMON[0].id})">
+            <div class="pokemon-card" >
                 <h2 class="pokemon-card-title">#${POKEMON[0].id} ${capitalizeFirstLetter(POKEMON[0].name)}</h2>
                 <img src="${IMAGE_URL}" class="card-img-top" alt="${capitalizeFirstLetter(POKEMON[0].name)}" style="background-color:${
         POKEMON[1].bgColorPrimary
@@ -45,14 +45,14 @@ function pokemonDetailsCardToHtmlTemplate(POKEMON) {
                         <h3 style="background-color:${POKEMON[1].bgColorPrimary}">${capitalizeFirstLetter(primaryType)} ${typesH3Element}</h3>
                     </div>
                     <div class="pokemon-card-info-nav-bar">
-                        <button class="" onclick="showPokemonDetails(event, 'main', ${POKEMON[0].id})">main</button>
-                        <button class="" onclick="showPokemonDetails(event, 'stats', ${POKEMON[0].id})">stats</button>
-                        <button class="" onclick="showPokemonDetails(event, 'evoChain', ${POKEMON[0].id})">evo chain</button>
+                        <button class="button" onclick="showPokemonDetails(event, 'main', ${POKEMON[0].id})">Main</button>
+                        <button class="button" onclick="showPokemonDetails(event, 'stats', ${POKEMON[0].id})">Stats</button>
+                        <button class="button" onclick="showPokemonDetails(event, 'evoChain', ${POKEMON[0].id})">EvoChain</button>
                     </div>
                     <div id="pokemon-info"></div>
                 </div>
                 <div class="card-overlay-footer">
-                <button onclick="pokemonCardOverlayBackward(${POKEMON[0].id})" class="button"><img class="button-img" src="./assets/img/icon/arow-left.png" alt=""></button><button onclick="pokemonCardOverlayForward(${POKEMON[0].id})"><img class="button-img" src="./assets/img/icon/arow-right.png"></button></div>
+                <button class="button" onclick="pokemonCardOverlayBackward(${POKEMON[0].id})" ><img class="button-img" src="./assets/img/icon/arow-left.png" alt=""></button><button class="button" onclick="pokemonCardOverlayForward(${POKEMON[0].id})"><img class="button-img" src="./assets/img/icon/arow-right.png"></button></div>
             </div>
         </div>
     `;
@@ -68,19 +68,19 @@ function pokemonMainInfoTemplate(POKEMON) {
     return `
         <table class="pokemon-detail-table">
             <tr>
-                <td>Height:</td>
+                <td><span class="table-span">Height:</span></td>
                 <td>${height} m</td>
             </tr>
             <tr>
-                <td>Weight:</td>
+                <td><span class="table-span">Weight:</span></td>
                 <td>${weight} kg</td>
             </tr>
             <tr>
-                <td>Base Experience:</td>
+                <td><span class="table-span">Base Experience:</span></td>
                 <td>${baseExperience}</td>
             </tr>
             <tr>
-                <td>Abilities:</td>
+                <td><span class="table-span">Abilities:</span></td>
                 <td>${ability1}, ${ability2}</td>
             </tr>
         </table>

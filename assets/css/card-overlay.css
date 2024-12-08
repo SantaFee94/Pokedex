@@ -1,16 +1,3 @@
-@keyframes slide-in-elliptic-bottom-fwd {
-    0% {
-        transform: translateY(600px) rotateX(30deg) scale(0);
-        transform-origin: 50% 100%;
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0) rotateX(0) scale(1);
-        transform-origin: 50% -1400px;
-        opacity: 1;
-    }
-}
-
 .card-overlay {
     position: fixed;
     top: 0;
@@ -21,19 +8,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
     visibility: hidden;
-    overflow: hidden;
+    z-index: 1000;
 }
 
 .pokemon-card {
-    animation-name: slide-in-elliptic-bottom-fwd;
-    animation-duration: 0.8s;
-    animation-timing-function: linear;
-    animation-delay: 0s;
-    animation-iteration-count: 1;
-    animation-direction: normal;
-    animation-fill-mode: none;
     width: 290px !important;
     border: solid 2px rgb(255, 0, 0);
     display: flex;
@@ -79,6 +58,11 @@
     padding: 0 6px 6px 6px;
 }
 
+.table-span {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
 .progress-bar {
     height: 10px;
     background-color: lightgreen;
@@ -86,6 +70,11 @@
 
 .pokemon-stats {
     padding-bottom: 24px;
+}
+
+.pokemon-stats p {
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 .evo-chain-img-container {
@@ -96,7 +85,7 @@
 }
 
 .evo-chain-img {
-    width: 100px !important;
+    width: 90px !important;
     height: auto !important;
 }
 

@@ -1,0 +1,27 @@
+@media (max-width: 860px) {
+    header a {
+        font-size: 96px;
+    }
+}
+
+@media (max-width: 730px) {
+    header a {
+        font-size: 84px;
+    }
+}
+
+@media (max-width: 670px) {
+    header {
+        flex-direction: column;
+        height: 120px;
+    }
+    header h1 {
+        margin: 0;
+    }
+    header a {
+        font-size: 70px;
+    }
+    .user-search-container input{
+        width: 275px;
+    }
+}

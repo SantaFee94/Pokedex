@@ -2,9 +2,8 @@ async function renderPokemonCardById(id) {
     toggleOverlay("loading-overlay", "visible");
 
     const POKEMON = await fetchPokemonDetails(`${BASE_URL}/${id}/`);
-    const DETAILS = await POKEMON;
 
-    currentPokemonDetails.push(DETAILS);
+    currentPokemonDetails.push(POKEMON);
     await getPokemoCardTypeColors();
 }
 
@@ -67,20 +66,19 @@ async function fetchPokemonEvoChain(id) {
     }
 }
 
-function pokemonCardOverlayForward(id) {
-    
-    let newPokemonId = (currentPokemonDetails[0].id = id + 1);
+async function pokemonCardOverlayForward(id) {
+    let newPokemonId = id + 1;
     currentPokemonDetails = [];
-    showPokemnonCard(newPokemonId);
+    await showPokemnonCard(newPokemonId);
 }
 
-function pokemonCardOverlayBackward(id) {
-    let newPokemonId = currentPokemonDetails[0].id;
+async function pokemonCardOverlayBackward(id) {
+    let newPokemonId = id;
     if (newPokemonId == 1) {
         return;
     } else {
         newPokemonId = id - 1;
     }
 
-    showPokemnonCard(newPokemonId);
+    await showPokemnonCard(newPokemonId);
 }
